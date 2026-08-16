@@ -21,15 +21,17 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
+      - name: Ensure pnpm (npm install -g pnpm fallback)
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: npx -y pnpm@latest install
 
       - name: Build
-        run: pnpm build
+        run: npx -y pnpm@latest run build
 
       - name: Export (static)
-        run: pnpm export || true
+        run: npx -y pnpm@latest export || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
